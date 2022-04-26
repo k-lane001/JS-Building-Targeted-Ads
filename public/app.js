@@ -1,29 +1,21 @@
-// get user's data
-                           
-
-// get user's coordinates
-
 // Get the user's time:                                                                                                                         
 function userTime(){
     const now = new Date()
     return now.getHours()
 } 
-
+//Determine which mealtime to promote based on hour
 function getMealTime() {
     const tod = userTime()
     return tod > 20 ? 'latenight snack' : tod > 16 ? 'dinner' : tod > 11 ? 'lunch' : 'breakfast'
 }
-
 // helper functions
-// Get the user's coordinates:                                                              
-function getCoords(){
-    return new Promise((resolve, reject) => {
+// Get the user's coordinates, asynchronously                                                           
+async function getCoords(){
+    pos = await new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
     })
     return [pos.coords.latitude, pos.coords.longitude]
 }             
-
-// check time of day
 
 // Build Ad 1:                                                           
 function buildAd1(){
@@ -34,8 +26,7 @@ function buildAd1(){
     content.append(inner)
 }
 
-// build ad 2
-                                                           
+// build ad 2                                                         
 function buildAd2(coordinates){
     const coords = coordinates
     const href = `https://www.google.com/maps/search/coffee/@${coords[0]},${coords[1]},15z/`
